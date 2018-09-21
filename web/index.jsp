@@ -10,7 +10,7 @@
     </head>
     <body>
         <form class="form-signin" method="post" action="${pageContext.request.contextPath}/Login">
-            <img class="mb-4" src="assets/images/unap.png" alt="" width="72" height="72">
+            <img class="mb-4 mx-auto d-block" src="assets/images/unap.png" alt="" width="90">
             <input type="hidden" name="accion" value="validarSesion">
             <h3 class="mb-3 text-center">Inicio de Sesion</h3>
             <div class="form-group">
@@ -23,9 +23,9 @@
             </div>
 
 
-            <c:if test="${not empty request.estado}">
+            <c:if test="${not empty requestScope.estado}">
                 <div class="alert alert-danger" role="alert">
-                    No es vacio
+                    ${requestScope.estado}
                 </div>
             </c:if>
 
