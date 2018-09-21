@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class Login extends HttpServlet {
 
@@ -32,6 +33,8 @@ public class Login extends HttpServlet {
 
     private void validarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
+        HttpSession session = request.getSession();
+        session.setAttribute("user", "Rene Araujo");
         
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -39,8 +42,9 @@ public class Login extends HttpServlet {
         if (email.equals("raraujo@unap.edu.pe") && password.equalsIgnoreCase("123")) {
             request.setAttribute("estado", "La conexion se realizo con exito!");
             
-            dispatcher = getServletContext().getRequestDispatcher("/home.jsp");
-            dispatcher.forward(request, response);
+            // dispatcher = getServletContext().getRequestDispatcher("/Home");
+            // dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/Home");
         } else {
             request.setAttribute("estado", "Las credenciales son incorrectas");
             
