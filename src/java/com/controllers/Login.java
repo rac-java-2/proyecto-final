@@ -16,6 +16,8 @@ public class Login extends HttpServlet {
 
         if ("validarSesion".equals(accion)) {
             this.validarSesion(request, response);
+        } else if("terminarSesion".equals(accion)) {
+            this.terminarSesion(request, response);
         } else {
             this.accionPorDefault(request, response);
         }
@@ -34,14 +36,12 @@ public class Login extends HttpServlet {
     private void validarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        session.setAttribute("user", "Rene Araujo");
-        
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         if (email.equals("raraujo@unap.edu.pe") && password.equalsIgnoreCase("123")) {
             request.setAttribute("estado", "La conexion se realizo con exito!");
-            
+            session.setAttribute("user", "Rene Araujo");            
             // dispatcher = getServletContext().getRequestDispatcher("/Home");
             // dispatcher.forward(request, response);
             response.sendRedirect(request.getContextPath() + "/Home");
@@ -51,6 +51,18 @@ public class Login extends HttpServlet {
             dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);
         }
+    }
+    
+    private void terminarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher;
+        HttpSession session = request.getSession();
+        
+        session.invalidate();
+        
+        request.setAttribute("estado", "Vuelva pronto!");
+        
+        dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
     }
     
     private void accionPorDefault(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

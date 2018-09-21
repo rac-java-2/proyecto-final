@@ -24,7 +24,7 @@
 
 
             <c:if test="${not empty requestScope.estado}">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-info" role="alert">
                     ${requestScope.estado}
                 </div>
             </c:if>

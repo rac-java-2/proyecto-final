@@ -23,10 +23,15 @@ import javax.servlet.http.HttpSession;
 public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         RequestDispatcher dispatcher;
         
-        dispatcher = getServletContext().getRequestDispatcher("/home.jsp");
-        dispatcher.forward(request, response);
+        if(session.getAttribute("user") == null) {
+            response.sendRedirect("/proyecto/index.jsp");
+        } else {
+            dispatcher = getServletContext().getRequestDispatcher("/home.jsp");
+            dispatcher.forward(request, response);            
+        }
 
     }
 
