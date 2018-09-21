@@ -14,12 +14,20 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accion = request.getParameter("accion");
 
-        if ("validarSesion".equals(accion)) {
-            this.validarSesion(request, response);
-        } else if("terminarSesion".equals(accion)) {
-            this.terminarSesion(request, response);
-        } else {
+        if (null == accion) {
             this.accionPorDefault(request, response);
+        } else switch (accion) {
+            case "formIndex":
+                break;
+            case "validarSesion":
+                this.validarSesion(request, response);
+                break;
+            case "terminarSesion":
+                this.terminarSesion(request, response);
+                break;
+            default:
+                this.accionPorDefault(request, response);
+                break;
         }
     }
 
