@@ -1,4 +1,4 @@
-package com.controllers;
+package com.controllers.Login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,15 +33,20 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        RequestDispatcher dispatcher;
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("user") == null) {
+            dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/Home");
+        }
+        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    private void validarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
         String email = request.getParameter("email");
@@ -50,8 +55,6 @@ public class Login extends HttpServlet {
         if (email.equals("raraujo@unap.edu.pe") && password.equalsIgnoreCase("123")) {
             request.setAttribute("estado", "La conexion se realizo con exito!");
             session.setAttribute("user", "Rene Araujo");            
-            // dispatcher = getServletContext().getRequestDispatcher("/Home");
-            // dispatcher.forward(request, response);
             response.sendRedirect(request.getContextPath() + "/Home");
         } else {
             request.setAttribute("estado", "Las credenciales son incorrectas");
@@ -60,13 +63,16 @@ public class Login extends HttpServlet {
             dispatcher.forward(request, response);
         }
     }
+
+    private void validarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
     
     private void terminarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
         
         session.invalidate();
-        
+        System.out.println("invalidate");
         request.setAttribute("estado", "Vuelva pronto!");
         
         dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
