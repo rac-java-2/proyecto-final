@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/Login/Logout.java</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/Login/Login.java</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/Login/NewServlet.java</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/home.jsp</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/web/index.html</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/Home.java</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/index.jsp</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/home.jsp</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/README.md</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/index.jsp</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/Login.java</file>
         </group>
     </open-files>
 </project-private>

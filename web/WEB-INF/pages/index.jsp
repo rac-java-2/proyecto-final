@@ -14,7 +14,7 @@
     <body>
         <form class="form-signin" method="post" action="${pageContext.request.contextPath}/Login">
             <img class="mb-4 mx-auto d-block" src="<c:url value="/assets/images/unap.png"/>" alt="logo" width="90">
-
+            
             <input type="hidden" name="accion" value="validarSesion">
             <h3 class="mb-3 text-center">Inicio de Sesion</h3>
             <div class="form-group">
