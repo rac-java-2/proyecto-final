@@ -68,4 +68,9 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <!-- https://ant.apache.org/manual/Tasks/copy.html -->
+    <target name="-post-dist">
+        <copy file="dist/py.war" todir="C:/tomcat8/webapps"/>
+    </target>
+
 </project>
