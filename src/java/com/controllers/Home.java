@@ -29,7 +29,7 @@ public class Home extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/Login");
         } else {
             //response.sendRedirect(request.getContextPath() + "/WEB-INF/home.jsp");
-            getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
         }
 
     }

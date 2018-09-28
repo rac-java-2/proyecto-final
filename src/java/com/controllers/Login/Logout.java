@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author Rene
  */
-@WebServlet(name = "Logout", urlPatterns = {"/Login/Logout"})
 public class Logout extends HttpServlet {
 
     @Override
