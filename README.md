@@ -8,7 +8,7 @@ Aplicación en la que se demuestra el uso de todas las herramientas, mencionanda
 - [ ] Módulo de registro de Cursos
 - [ ] Módulo de registro de Estudiantes
 
-# Plataforma de desarrollo
+## Plataforma de desarrollo
 
 - Netbeans 8 o superior
 - Apache Tomcat 8
