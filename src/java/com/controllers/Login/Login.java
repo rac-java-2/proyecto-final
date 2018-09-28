@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         
         if (session.getAttribute("user") == null) {
-            dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/index.jsp");
             dispatcher.forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/Home");
