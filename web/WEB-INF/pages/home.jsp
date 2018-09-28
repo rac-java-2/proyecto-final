@@ -1,9 +1,4 @@
-<%-- 
-    Document   : home
-    Created on : 21-sep-2018, 4:45:31
-    Author     : Rene
---%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +7,8 @@
         <title>JSP Page</title>
         
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        
+        <link rel="shortcut icon" href="<c:url value="/java.ico" />" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,7 +37,7 @@
                         <a class="nav-link disabled" href="#">Permisos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/proyecto/Login/Logout">Salir</a>
+                        <a class="nav-link" href="<c:url value="/Login/logout" />">Salir</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">

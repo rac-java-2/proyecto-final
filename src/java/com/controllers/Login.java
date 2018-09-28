@@ -1,4 +1,4 @@
-package com.controllers.Login;
+package com.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,28 +14,7 @@ import javax.servlet.http.HttpSession;
 
 public class Login extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String accion = request.getParameter("accion");
-
-        if (null == accion) {
-            this.accionPorDefault(request, response);
-        } else {
-            switch (accion) {
-                case "formIndex":
-                    break;
-                case "validarSesion":
-                    this.validarSesion(request, response);
-                    break;
-                case "terminarSesion":
-                    this.terminarSesion(request, response);
-                    break;
-                default:
-                    this.accionPorDefault(request, response);
-                    break;
-            }
-        }
-    }
-
+    /*
     private void redirigir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession(false);
@@ -51,38 +30,54 @@ public class Login extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/Home");
         }
     }
+     */
+    
+    private void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+    }
+
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            session.invalidate();
+            System.out.println("invalidate");
+            request.setAttribute("estado", "Vuelva pronto!");
+
+            getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/Login");
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accion = request.getPathInfo();
         String metodo;
-        
+
         try {
             metodo = accion.substring(1).split("/")[0];
-            
-            switch(metodo) {
+
+            switch (metodo) {
+                case "index":
+                    this.index(request, response);
+                    break;
                 case "help":
                     response.getWriter().append("metodo ayuda");
                     break;
-                case "exit":
-                    response.getWriter().append("metodo salida del sistema");
+                case "logout":
+                    this.logout(request, response);
                     break;
                 default:
-                    response.getWriter().append("desconocido");
-                    break;
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
             }
-            
-        } catch(NullPointerException e) {
-            response.getWriter().append("indice");
+        } catch (NullPointerException e) {
+            this.index(request, response);
         }
-        
-        
-        // processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -94,29 +89,7 @@ public class Login extends HttpServlet {
         } else {
             request.setAttribute("estado", "Las credenciales son incorrectas");
 
-            dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-            dispatcher.forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
         }
-    }
-
-    private void validarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    private void terminarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher;
-        HttpSession session = request.getSession();
-
-        session.invalidate();
-        System.out.println("invalidate");
-        request.setAttribute("estado", "Vuelva pronto!");
-
-        dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void accionPorDefault(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext sc = request.getServletContext();
-
-        sc.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
     }
 }
