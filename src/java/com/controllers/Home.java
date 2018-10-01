@@ -25,7 +25,7 @@ public class Home extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("nickname") == null) {
             response.sendRedirect(request.getContextPath() + "/Login");
         } else {
             //response.sendRedirect(request.getContextPath() + "/WEB-INF/home.jsp");

@@ -68,24 +68,7 @@ public class Login extends HttpServlet {
     }
         
     private void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
-        PrintWriter out = response.getWriter();
-        
-        MySQLDaoManager man = new MySQLDaoManager(cn);
-        
-        List<Usuario> usuarios;
-        
-        try {
-            usuarios = man.getUsuarioDAO().obtenerTodos();
-
-            for (Usuario u : usuarios) {
-                out.println(u.toString());
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        System.out.println("index action");
+        getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,6 +82,34 @@ public class Login extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/Login");
+        }
+    }
+    
+    private void validate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+    
+        MySQLDaoManager man = new MySQLDaoManager(cn);
+
+        Usuario u;
+
+        try {
+            u = man.getUsuarioDAO().getByCredentials(nickname, password);
+
+            if (u != null) {
+                System.out.println(u.toString());
+                request.setAttribute("estado", "La conexion se realizo con exito!");
+                session.setAttribute("nickname", u.getNickname());
+                session.setAttribute("role", u.getRole());
+                response.sendRedirect(request.getContextPath() + "/Home");
+            } else {
+                request.setAttribute("estado", "Las credenciales son incorrectas");
+
+                getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -130,18 +141,21 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String accion = request.getPathInfo();
+        String metodo;
 
-        if (email.equals("raraujo@unap.edu.pe") && password.equalsIgnoreCase("123")) {
-            request.setAttribute("estado", "La conexion se realizo con exito!");
-            session.setAttribute("user", "Rene Araujo");
-            response.sendRedirect(request.getContextPath() + "/Home");
-        } else {
-            request.setAttribute("estado", "Las credenciales son incorrectas");
+        try {
+            metodo = accion.substring(1).split("/")[0];
 
-            getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+            switch (metodo) {
+                case "validate":
+                    this.validate(request, response);
+                    break;
+                default:
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            }
+        } catch (NullPointerException e) {
+            this.index(request, response);
         }
     }
 }

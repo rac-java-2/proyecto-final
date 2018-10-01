@@ -27,6 +27,8 @@ public class MySQLUsuarioDAO implements IUsuarioDAO {
     final String GETALL = "SELECT id, nickname, password, role FROM users";
     final String GETONE = "SELECT id, nickname, password, role FROM users WHERE id = ?";
     
+    private final String BY_CREDENTIALS = "SELECT id, nickname, password, role FROM users WHERE nickname = ? AND password = ?";
+    
     private Connection cn;
     
     public MySQLUsuarioDAO(Connection cn) {
@@ -116,6 +118,28 @@ public class MySQLUsuarioDAO implements IUsuarioDAO {
         
         pstmt = cn.prepareStatement(GETONE);
         pstmt.setInt(1, id);
+        rs = pstmt.executeQuery();
+        
+        if(rs.next()) {
+            u = convertir(rs);
+        }
+        
+        rs.close();
+        pstmt.close();
+        
+        return u;
+    }
+
+    @Override
+    public Usuario getByCredentials(String nickname, String password) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Usuario u = null;
+        
+        pstmt = cn.prepareStatement(BY_CREDENTIALS);
+        pstmt.setString(1, nickname);
+        pstmt.setString(2, password);
+        
         rs = pstmt.executeQuery();
         
         if(rs.next()) {

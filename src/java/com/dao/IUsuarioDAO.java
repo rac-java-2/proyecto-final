@@ -19,5 +19,7 @@ public interface IUsuarioDAO {
     List<Usuario> obtenerTodos() throws SQLException;
     
     Usuario obtener(Integer id) throws SQLException;
+    
+    Usuario getByCredentials(String nickname, String password) throws SQLException;
 
 }

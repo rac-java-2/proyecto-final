@@ -12,14 +12,14 @@
         <link rel="shortcut icon" href="<c:url value="/java.ico" />" />
     </head>
     <body>
-        <form class="form-signin" method="post" action="${pageContext.request.contextPath}/Login">
+        <form class="form-signin" method="post" action="${pageContext.request.contextPath}/Login/validate">
             <img class="mb-4 mx-auto d-block" src="<c:url value="/assets/images/unap.png"/>" alt="logo" width="90">
             
             <input type="hidden" name="accion" value="validarSesion">
             <h3 class="mb-3 text-center">Inicio de Sesion</h3>
             <div class="form-group">
-                <label>Correo electronico</label>
-                <input type="email" name="email" class="form-control" placeholder="Correo electronico" required>
+                <label>Usuario</label>
+                <input type="text" name="nickname" class="form-control" placeholder="Usuario" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Clave</label>
