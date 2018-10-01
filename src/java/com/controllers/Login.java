@@ -1,18 +1,36 @@
 package com.controllers;
 
+import com.connetion.DbMysql;
+import com.dao.ICursoDAO;
+import com.dao.IUsuarioDAO;
+import com.dao.mysql.MySQLCursoDAO;
+import com.dao.mysql.MySQLDaoManager;
+import com.dao.mysql.MySQLUsuarioDAO;
+import com.models.Curso;
+import com.models.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.print.attribute.standard.Severity;
-import javax.servlet.RequestDispatcher;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 public class Login extends HttpServlet {
+    private DbMysql db;
+    private Connection cn;
 
     /*
     private void redirigir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,8 +50,42 @@ public class Login extends HttpServlet {
     }
      */
     
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        
+        String jdbcUrl = getServletContext().getInitParameter("jdbcUrl");
+        String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
+        String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
+        
+        db = new DbMysql(jdbcUrl, jdbcUsername, jdbcPassword);
+        
+        try {
+            cn = db.getConnection();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+        
     private void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+        // getServletContext().getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+        PrintWriter out = response.getWriter();
+        
+        MySQLDaoManager man = new MySQLDaoManager(cn);
+        
+        List<Usuario> usuarios;
+        
+        try {
+            usuarios = man.getUsuarioDAO().obtenerTodos();
+
+            for (Usuario u : usuarios) {
+                out.println(u.toString());
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println("index action");
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
