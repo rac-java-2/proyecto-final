@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/Home.java</file>
-            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/home.jsp</file>
-            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/dao/IUsuarioDAO.java</file>
-            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/index.jsp</file>
-            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/dao/mysql/MySQLDaoManager.java</file>
-            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/Login.java</file>
-            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/dao/mysql/MySQLUsuarioDAO.java</file>
+            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/RouteController.java</file>
+            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/curso/index.jsp</file>
+            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/UsuarioController.java</file>
         </group>
     </open-files>
 </project-private>

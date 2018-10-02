@@ -13,12 +13,12 @@
         <param-value>toor</param-value>
     </context-param>
     <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>com.controllers.Login</servlet-class>
+        <servlet-name>Route</servlet-name>
+        <servlet-class>com.controllers.Route</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/Login/*</url-pattern>
+        <servlet-name>Route</servlet-name>
+        <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

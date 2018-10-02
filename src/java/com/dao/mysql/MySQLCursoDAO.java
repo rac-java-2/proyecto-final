@@ -20,11 +20,11 @@ import java.util.List;
  * @author Rene
  */
 public class MySQLCursoDAO implements ICursoDAO {
-    final String INSERT = "INSERT INTO cursos(descripcion) VALUES(?)";
-    final String UPDATE = "UPDATE cursos SET descripcion = ? WHERE id = ?";
-    final String DELETE = "DELETE FROM cursos WHERE id = ?";
-    final String GETALL = "SELECT id, descripcion FROM cursos";
-    final String GETONE = "SELECT id, descripcion FROM cursos WHERE id = ?";
+    final String INSERT = "INSERT INTO courses(description) VALUES(?)";
+    final String UPDATE = "UPDATE courses SET description = ? WHERE id = ?";
+    final String DELETE = "DELETE FROM courses WHERE id = ?";
+    final String GETALL = "SELECT id, description FROM courses";
+    final String GETONE = "SELECT id, description FROM courses WHERE id = ?";
     
     private Connection cn;
     
@@ -34,7 +34,7 @@ public class MySQLCursoDAO implements ICursoDAO {
     
     private Curso convertir(ResultSet rs) throws SQLException {
         Integer id = rs.getInt("id");
-        String descripcion = rs.getString("descripcion");
+        String descripcion = rs.getString("description");
         
         Curso c = new Curso(descripcion);
         c.setId(id);
@@ -47,7 +47,7 @@ public class MySQLCursoDAO implements ICursoDAO {
         PreparedStatement pstmt = null;
         
         pstmt = cn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-        pstmt.setString(1, c.getDescripcion());
+        pstmt.setString(1, c.getDescription());
         pstmt.executeUpdate();
         
         ResultSet rs = pstmt.getGeneratedKeys();
@@ -56,7 +56,6 @@ public class MySQLCursoDAO implements ICursoDAO {
             c.setId(rs.getInt(1));
         }
 
-        
         rs.close();
         pstmt.close();
     }
@@ -66,7 +65,7 @@ public class MySQLCursoDAO implements ICursoDAO {
         PreparedStatement pstmt;
         
         pstmt = cn.prepareStatement(UPDATE);
-        pstmt.setString(1, c.getDescripcion());
+        pstmt.setString(1, c.getDescription());
         pstmt.setInt(2, c.getId());
         pstmt.executeUpdate();
         

@@ -2,6 +2,7 @@ package com.dao.mysql;
 
 import com.dao.ICursoDAO;
 import com.dao.IDAOManager;
+import com.dao.IInscripcionDAO;
 import com.dao.IUsuarioDAO;
 import java.sql.Connection;
 
@@ -10,7 +11,8 @@ public class MySQLDaoManager implements IDAOManager {
     
     private IUsuarioDAO usuarios = null;
     private ICursoDAO cursos = null;
-    
+    private IInscripcionDAO inscripciones = null;
+
     public MySQLDaoManager(Connection cn) {
         this.cn = cn;
     }
@@ -31,5 +33,14 @@ public class MySQLDaoManager implements IDAOManager {
         }
         
         return usuarios;
+    }
+
+    @Override
+    public IInscripcionDAO getInscripcionDAO() {
+        if(inscripciones == null) {
+            inscripciones = new MySQLInscripcionDAO(cn);
+        }
+        
+        return inscripciones;
     }
 }

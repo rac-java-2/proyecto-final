@@ -2,7 +2,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Bienvenido a Green Point</title>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +13,7 @@
         <link rel="shortcut icon" href="<c:url value="/java.ico" />" />
     </head>
     <body>
-        <form class="form-signin" method="post" action="${pageContext.request.contextPath}/Login/validate">
+        <form class="form-signin" method="post" action="${pageContext.request.contextPath}/app/Login/validate">
             <img class="mb-4 mx-auto d-block" src="<c:url value="/assets/images/unap.png"/>" alt="logo" width="90">
             
             <input type="hidden" name="accion" value="validarSesion">

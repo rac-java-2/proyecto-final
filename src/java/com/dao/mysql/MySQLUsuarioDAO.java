@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dao.mysql;
 
 import com.dao.IUsuarioDAO;
-import com.models.Curso;
 import com.models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,18 +10,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Rene
- */
 public class MySQLUsuarioDAO implements IUsuarioDAO {
-    final String INSERT = "INSERT INTO users(nickname, password) VALUES(?, ?)";
+    final String INSERT = "INSERT INTO users(nickname, password, role) VALUES(?, AES_ENCRYPT(?, UNHEX(?)), ?)";
     final String UPDATE = "UPDATE users SET nickname = ? AND password = ? WHERE id = ?";
-    final String DELETE = "DELETE FROM usuarios WHERE id = ?";
+    final String DELETE = "DELETE FROM users WHERE id = ?";
     final String GETALL = "SELECT id, nickname, password, role FROM users";
     final String GETONE = "SELECT id, nickname, password, role FROM users WHERE id = ?";
     
-    private final String BY_CREDENTIALS = "SELECT id, nickname, password, role FROM users WHERE nickname = ? AND password = ?";
+    private final String BY_CREDENTIALS = "SELECT id, nickname, password, role FROM users WHERE nickname = ? AND AES_DECRYPT(password, UNHEX(?)) = ?";
     
     private Connection cn;
     
@@ -54,7 +44,8 @@ public class MySQLUsuarioDAO implements IUsuarioDAO {
         pstmt = cn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
         pstmt.setString(1, u.getNickname());
         pstmt.setString(2, u.getPassword());
-        pstmt.setString(3, u.getRole());
+        pstmt.setString(3, "1E51540F");
+        pstmt.setString(4, u.getRole());
         pstmt.executeUpdate();
         
         ResultSet rs = pstmt.getGeneratedKeys();
@@ -138,7 +129,8 @@ public class MySQLUsuarioDAO implements IUsuarioDAO {
         
         pstmt = cn.prepareStatement(BY_CREDENTIALS);
         pstmt.setString(1, nickname);
-        pstmt.setString(2, password);
+        pstmt.setString(2, "1E51540F");
+        pstmt.setString(3, password);
         
         rs = pstmt.executeQuery();
         

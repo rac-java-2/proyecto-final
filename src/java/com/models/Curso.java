@@ -1,20 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.models;
 
-/**
- *
- * @author Rene
- */
 public class Curso {
     private Integer id;
-    private String descripcion;
+    private String description;
 
-    public Curso(String descripcion) {
-        this.descripcion = descripcion;
+    public Curso(String description) {
+        this.description = description;
     }
 
     public Integer getId() {
@@ -25,16 +16,18 @@ public class Curso {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", descripcion=" + descripcion + '}';
+        return "Curso{" + "id=" + id + ", description=" + description + '}';
     }
+
+    
 }

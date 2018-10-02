@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    response.sendRedirect("/py/Login");
+    response.sendRedirect("/py/app/Login");
 %>
 <!DOCTYPE html>
 <html>

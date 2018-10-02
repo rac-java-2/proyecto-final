@@ -14,4 +14,5 @@ public interface IDAOManager {
     
     IUsuarioDAO getUsuarioDAO();
     
+    IInscripcionDAO getInscripcionDAO();
 }
