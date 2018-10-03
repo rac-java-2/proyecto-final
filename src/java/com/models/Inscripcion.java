@@ -1,23 +1,25 @@
 package com.models;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Inscripcion {
     private Integer id;
     private String firstName;
     private String lastName;
     private String cellphone;
-    private Integer courseId;
     private Integer price;
-    private LocalDate registrationDate;
+    private Date registrationDate;
+    
+    // course id
+    private Curso curso;
 
-    public Inscripcion(String firstName, String lastName, String cellphone, Integer courseId, Integer price, LocalDate registrationDate) {
+    public Inscripcion(String firstName, String lastName, String cellphone, Integer price, Date registrationDate, Curso curso) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cellphone = cellphone;
-        this.courseId = courseId;
         this.price = price;
         this.registrationDate = registrationDate;
+        this.curso = curso;
     }
 
     public Integer getId() {
@@ -52,14 +54,6 @@ public class Inscripcion {
         this.cellphone = cellphone;
     }
 
-    public Integer getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
-    }
-
     public Integer getPrice() {
         return price;
     }
@@ -68,16 +62,29 @@ public class Inscripcion {
         this.price = price;
     }
 
-    public LocalDate getRegistrationDate() {
+    public Date getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(LocalDate registrationDate) {
+    public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+    
+    public String getFullname() {
+        return firstName + " " + lastName;
     }
 
     @Override
     public String toString() {
-        return "Inscripcion{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", cellphone=" + cellphone + ", courseId=" + courseId + ", price=" + price + ", registrationDate=" + registrationDate + '}';
+        return "Inscripcion{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", cellphone=" + cellphone + ", price=" + price + ", registrationDate=" + registrationDate + ", curso=" + curso + '}';
     }
+    
 }

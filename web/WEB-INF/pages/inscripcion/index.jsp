@@ -12,17 +12,15 @@
 
         <div class="container py-2">
 
-            <a href="${pageContext.request.contextPath}/app/Inscripcion/create">Agregar nuevo curso</a>
+            <a href="${pageContext.request.contextPath}/app/Inscripcion/create">Agregar nueva inscripcion</a>
 
 
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
+                        <th>Fullname</th>
                         <th>Cellphone</th>
-                        <th>Course ID</th>
                         <th>Price</th>
                         <th>Registration date</th>
                         <th>Options</th>
@@ -32,10 +30,11 @@
                     <c:forEach var="inscripcion" items="${inscripciones}" varStatus="row">
                         <tr>
                             <td>${inscripcion.id}</td>
-                            <td>${inscripcion.firstName}</td>
-                            <td>${inscripcion.lastName}</td>
+                            <td>
+                                ${inscripcion.fullname}
+                                <p class="text-info">${inscripcion.curso.description}</p>
+                            </td>
                             <td>${inscripcion.cellphone}</td>
-                            <td>${inscripcion.courseId}</td>
                             <td>${inscripcion.price}</td>
                             <td>${inscripcion.registrationDate}</td>
                             <td>

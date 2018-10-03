@@ -100,6 +100,9 @@ public class Route extends HttpServlet {
             case "^/Inscripcion/index$":
                 new InscripcionController(sc, Db.getConnection()).index(request, response);
                 break;
+            case "^/Inscripcion/create$":
+                new InscripcionController(sc, Db.getConnection()).create(request, response);
+                break;
             default:
                 System.out.println("Metodo GET sin implementar");
         }
@@ -115,6 +118,9 @@ public class Route extends HttpServlet {
                 break;
             case "^/Curso/store$":
                 new CursoController(sc, Db.getConnection()).store(request, response);
+                break;
+            case "^/Inscripcion/store$":
+                new InscripcionController(sc, Db.getConnection()).store(request, response);
                 break;
             default:
                 System.out.println("Metodo POST sin implementar");

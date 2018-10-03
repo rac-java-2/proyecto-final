@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +32,10 @@ public class MySQLInscripcionDAO implements IInscripcionDAO {
         String cellphone = rs.getString("cellphone");
         Integer courseId = rs.getInt("courses_id");
         Integer price = rs.getInt("price");
-        LocalDate registrationDate = null;
+        Date registrationDate = rs.getDate("registration_date");
         
-        //Curso c = new Curso(descripcion);
-        Inscripcion i = new Inscripcion(firstName, lastName, cellphone, courseId, price, registrationDate);
+        Curso curso = new Curso("curso de prueba - temporal");
+        Inscripcion i = new Inscripcion(firstName, lastName, cellphone, price, registrationDate, curso);
         i.setId(id);
         
         return i;
@@ -50,9 +49,9 @@ public class MySQLInscripcionDAO implements IInscripcionDAO {
         pstmt.setString(1, i.getFirstName());
         pstmt.setString(2, i.getLastName());
         pstmt.setString(3, i.getCellphone());
-        pstmt.setInt(4, i.getCourseId());
+        pstmt.setInt(4, i.getCurso().getId());
         pstmt.setInt(5, i.getPrice());
-        pstmt.setDate(6, Date.valueOf(i.getRegistrationDate()));
+        pstmt.setDate(6, new Date(i.getRegistrationDate().getTime()));
         pstmt.executeUpdate();
         
         ResultSet rs = pstmt.getGeneratedKeys();
@@ -73,9 +72,9 @@ public class MySQLInscripcionDAO implements IInscripcionDAO {
         pstmt.setString(1, i.getFirstName());
         pstmt.setString(2, i.getLastName());
         pstmt.setString(3, i.getCellphone());
-        pstmt.setInt(4, i.getCourseId());
+        pstmt.setInt(4, 2);
         pstmt.setInt(5, i.getPrice());
-        pstmt.setDate(6, Date.valueOf(i.getRegistrationDate()));
+        pstmt.setDate(6, new Date(i.getRegistrationDate().getTime()));
         pstmt.setInt(7, i.getId());
         pstmt.executeUpdate();
         
