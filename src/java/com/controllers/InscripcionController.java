@@ -75,7 +75,7 @@ public class InscripcionController {
             Date registrationDate;
             
             try {
-                registrationDate = new SimpleDateFormat("yyyy/MM/dd").parse(request.getParameter("registration_date"));  
+                registrationDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("registration_date"));  
             } catch(ParseException e) {
                 System.out.println("Error al parsear fecha: " + e.getMessage());
                 registrationDate = new Date();
