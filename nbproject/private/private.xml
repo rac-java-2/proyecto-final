@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/InscripcionController.java</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/inscripcion/create.jsp</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/inscripcion/index.jsp</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/dao/mysql/MySQLInscripcionDAO.java</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/Route.java</file>
-            <file>file:/C:/Users/Samuel/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/CursoController.java</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/web/WEB-INF/pages/inscripcion/index.jsp</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/models/Inscripcion.java</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/dao/mysql/MySQLInscripcionDAO.java</file>
+            <file>file:/C:/Users/Rene/Documents/NetBeansProjects/proyecto-final/src/java/com/controllers/InscripcionController.java</file>
         </group>
     </open-files>
 </project-private>
