@@ -1,5 +1,8 @@
-<!-- https://ant.apache.org/manual/Tasks/copy.html -->
-    <target name="-post-dist">
-        <copy file="dist/stelar.war" todir="C:/tomcat8/webapps"/>
-    </target>
+<target name="-post-dist">
+    <copy file="dist/stelar.war" todir="C:/tomcat8/webapps"/>
+</target>
 
+<Resource name="jdbc/connectionMySQL" auth="Container" type="javax.sql.DataSource"
+        maxActive="20" maxIdle="10" maxWait="5000"
+        username="root" password="toor" driverClassName="com.mysql.cj.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/db_java"/>

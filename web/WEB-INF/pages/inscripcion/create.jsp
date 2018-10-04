@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="price">Precio</label>
-                    <input type="number" class="form-control" id="price" name="price" min="0" required>
+                    <input type="number" class="form-control" id="price" name="price" min="0" step="0.01"  max="9999.99" required>
                 </div>
                 <div class="form-group">
                     <label for="registration_date">Fecha de registro</label>

@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,11 +30,14 @@
                         <tr>
                             <td>${inscripcion.id}</td>
                             <td>
-                                ${inscripcion.fullname}
-                                <p class="text-info">${inscripcion.curso.description}</p>
+                                ${inscripcion.fullname}<br>
+                                <p class="text-info">
+                                    Codigo del curso:
+                                    <a href="${pageContext.request.contextPath}/app/Curso/${inscripcion.courseId}">${inscripcion.courseId}</a>
+                                </p>
                             </td>
                             <td>${inscripcion.cellphone}</td>
-                            <td>${inscripcion.price}</td>
+                            <td>${inscripcion.formatPrice}</td>
                             <td>${inscripcion.registrationDate}</td>
                             <td>
                                 <a class="btn btn-warning" href="#">Editar</a>

@@ -51,6 +51,7 @@ public class CursoController {
     }
 
     public void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         sc.getRequestDispatcher("/WEB-INF/pages/curso/create.jsp").forward(request, response);
     }
 
@@ -68,7 +69,22 @@ public class CursoController {
         response.sendRedirect(request.getContextPath() + "/app/Curso");
     }
 
+    public void show(HttpServletRequest request, HttpServletResponse response, String id) throws ServletException, IOException {
+        Curso c = null;
+        
+        try {
+            c = manager.getCursoDAO().obtener(Integer.parseInt(id));
+
+            cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Usuario: " + ex.getMessage());
+        }
+        
+        response.getWriter().println("Curso: " + c.getDescription());
+    }
+
     public void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String description = request.getParameter("description");
 
         Curso c = new Curso(description);

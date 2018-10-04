@@ -31,11 +31,10 @@ public class MySQLInscripcionDAO implements IInscripcionDAO {
         String lastName = rs.getString("last_name");
         String cellphone = rs.getString("cellphone");
         Integer courseId = rs.getInt("courses_id");
-        Integer price = rs.getInt("price");
+        Double price = rs.getDouble("price");
         Date registrationDate = rs.getDate("registration_date");
-        
-        Curso curso = new Curso("curso de prueba - temporal");
-        Inscripcion i = new Inscripcion(firstName, lastName, cellphone, price, registrationDate, curso);
+
+        Inscripcion i = new Inscripcion(firstName, lastName, cellphone, courseId, price, registrationDate);
         i.setId(id);
         
         return i;
@@ -49,8 +48,8 @@ public class MySQLInscripcionDAO implements IInscripcionDAO {
         pstmt.setString(1, i.getFirstName());
         pstmt.setString(2, i.getLastName());
         pstmt.setString(3, i.getCellphone());
-        pstmt.setInt(4, i.getCurso().getId());
-        pstmt.setInt(5, i.getPrice());
+        pstmt.setInt(4, i.getCourseId());
+        pstmt.setDouble(5, i.getPrice());
         pstmt.setDate(6, new Date(i.getRegistrationDate().getTime()));
         pstmt.executeUpdate();
         
@@ -72,8 +71,8 @@ public class MySQLInscripcionDAO implements IInscripcionDAO {
         pstmt.setString(1, i.getFirstName());
         pstmt.setString(2, i.getLastName());
         pstmt.setString(3, i.getCellphone());
-        pstmt.setInt(4, 2);
-        pstmt.setInt(5, i.getPrice());
+        pstmt.setInt(4, i.getCourseId());
+        pstmt.setDouble(5, i.getPrice());
         pstmt.setDate(6, new Date(i.getRegistrationDate().getTime()));
         pstmt.setInt(7, i.getId());
         pstmt.executeUpdate();
@@ -93,7 +92,7 @@ public class MySQLInscripcionDAO implements IInscripcionDAO {
     }
 
     @Override
-    public List<Inscripcion> obtenerTodos() throws SQLException {
+    public List<Inscripcion> getTodos() throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Inscripcion> inscripciones = new ArrayList<>();
@@ -129,5 +128,30 @@ public class MySQLInscripcionDAO implements IInscripcionDAO {
         pstmt.close();
         
         return i;
+    }
+
+    @Override
+    public Curso obtenerCurso() throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Curso c = null;
+        
+        pstmt = cn.prepareStatement("SELECT id, description FROM courses WHERE id = ?");
+        pstmt.setInt(1, 1);
+        rs = pstmt.executeQuery();
+        
+        if (rs.next()) {
+            Integer id = rs.getInt("id");
+            String description = rs.getString("description");
+
+            c = new Curso(description);
+            c.setId(id);
+
+        }
+
+        rs.close();
+        pstmt.close();
+        
+        return c;
     }
 }

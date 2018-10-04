@@ -1,12 +1,7 @@
 package com.controllers;
 
 import com.connetion.Db;
-import com.dao.mysql.MySQLDaoManager;
-import com.models.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -35,6 +30,7 @@ public class Route extends HttpServlet {
         "^/Usuario/destroy/[0-9]+$",
         "^/Curso$",
         "^/Curso/index$",
+        "^/Curso/[0-9]+$",
         "^/Curso/create$",
         "^/Curso/store$",
         "^/Curso/destroy/[0-9]+$",
@@ -90,6 +86,9 @@ public class Route extends HttpServlet {
             case "^/Curso/index$":
                 new CursoController(sc, Db.getConnection()).index(request, response);
                 break;
+            case "^/Curso/[0-9]+$":
+                new CursoController(sc, Db.getConnection()).show(request, response, action.substring(action.lastIndexOf('/') + 1));
+                break;
             case "^/Curso/create$":
                 new CursoController(sc).create(request, response);
                 break;
@@ -102,6 +101,9 @@ public class Route extends HttpServlet {
                 break;
             case "^/Inscripcion/create$":
                 new InscripcionController(sc, Db.getConnection()).create(request, response);
+                break;
+            case "^/Inscripcion/destroy/[0-9]+$":
+                new InscripcionController(sc, Db.getConnection()).destroy(request, response, action.substring(action.lastIndexOf('/') + 1));
                 break;
             default:
                 System.out.println("Metodo GET sin implementar");

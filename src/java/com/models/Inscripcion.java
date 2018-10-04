@@ -1,5 +1,6 @@
 package com.models;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class Inscripcion {
@@ -7,19 +8,17 @@ public class Inscripcion {
     private String firstName;
     private String lastName;
     private String cellphone;
-    private Integer price;
+    private Integer courseId;
+    private Double price;
     private Date registrationDate;
-    
-    // course id
-    private Curso curso;
 
-    public Inscripcion(String firstName, String lastName, String cellphone, Integer price, Date registrationDate, Curso curso) {
+    public Inscripcion(String firstName, String lastName, String cellphone, Integer courseId, Double price, Date registrationDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cellphone = cellphone;
+        this.courseId = courseId;
         this.price = price;
         this.registrationDate = registrationDate;
-        this.curso = curso;
     }
 
     public Integer getId() {
@@ -54,11 +53,19 @@ public class Inscripcion {
         this.cellphone = cellphone;
     }
 
-    public Integer getPrice() {
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
+
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -69,22 +76,14 @@ public class Inscripcion {
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
     
     public String getFullname() {
         return firstName + " " + lastName;
     }
-
-    @Override
-    public String toString() {
-        return "Inscripcion{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", cellphone=" + cellphone + ", price=" + price + ", registrationDate=" + registrationDate + ", curso=" + curso + '}';
-    }
     
+    public String getFormatPrice() {
+        DecimalFormat formatNumber = new DecimalFormat("S/ #,###.00");
+
+        return formatNumber.format(price);
+    }
 }

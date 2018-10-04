@@ -6,6 +6,8 @@ import com.models.Inscripcion;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,12 +38,7 @@ public class InscripcionController {
         List<Inscripcion> inscripciones;
 
         try {
-            inscripciones = manager.getInscripcionDAO().obtenerTodos();
-            
-            for(Inscripcion i : inscripciones) {
-                Integer coursesId = 5;
-                i.setCurso(manager.getCursoDAO().obtener(coursesId));
-            }
+            inscripciones = manager.getInscripcionDAO().getTodos();
             
             request.setAttribute("inscripciones", inscripciones);
 
@@ -73,11 +70,18 @@ public class InscripcionController {
             String firstName = request.getParameter("first_name");
             String lastName = request.getParameter("last_name");
             String cellphone = request.getParameter("cellphone");
-            Curso curso = manager.getCursoDAO().obtener(Integer.parseInt(request.getParameter("courses_id")));
-            Integer price = Integer.parseInt(request.getParameter("price"));
-            Date registrationDate = new Date();
+            Integer courseId = Integer.parseInt(request.getParameter("courses_id"));
+            Double price = Double.parseDouble(request.getParameter("price"));
+            Date registrationDate;
             
-            Inscripcion i = new Inscripcion(firstName, lastName, cellphone, price, registrationDate, curso);
+            try {
+                registrationDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("registration_date"));  
+            } catch(ParseException e) {
+                System.out.println("Error al parsear fecha: " + e.getMessage());
+                registrationDate = new Date();
+            }
+            
+            Inscripcion i = new Inscripcion(firstName, lastName, cellphone, courseId, price, registrationDate);
             
             manager.getInscripcionDAO().insertar(i);
             cn.close();
@@ -87,5 +91,20 @@ public class InscripcionController {
 
         response.sendRedirect(request.getContextPath() + "/app/Inscripcion");
     }
+    
+        public void destroy(HttpServletRequest request, HttpServletResponse response, String id) throws ServletException, IOException {
+        try {
+            Inscripcion i = manager.getInscripcionDAO().obtener(Integer.parseInt(id));
+
+            manager.getInscripcionDAO().eliminar(i);
+            cn.close();
+        } catch (SQLException ex) {
+            System.out.println("Inscripcion: " + ex.getMessage());
+        }
+
+        System.out.println("Redireccion al servlet /Inscripcion");
+        response.sendRedirect(request.getContextPath() + "/app/Inscripcion/index");
+    }
+
     
 }

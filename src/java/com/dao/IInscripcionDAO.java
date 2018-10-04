@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.models.Curso;
 import com.models.Inscripcion;
 import java.sql.SQLException;
 import java.util.List;
@@ -11,7 +12,9 @@ public interface IInscripcionDAO {
     
     void eliminar(Inscripcion i) throws SQLException;
     
-    List<Inscripcion> obtenerTodos() throws SQLException;
+    List<Inscripcion> getTodos() throws SQLException;
+    
+    Curso obtenerCurso() throws SQLException;
     
     Inscripcion obtener(Integer id) throws SQLException;    
 }
